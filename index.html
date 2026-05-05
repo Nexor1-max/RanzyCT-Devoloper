@@ -34,7 +34,6 @@ html, body {
   -webkit-overflow-scrolling: touch;
 }
 
-/* ─── CANVAS BG ─── */
 canvas {
   position: fixed;
   inset: 0;
@@ -42,7 +41,6 @@ canvas {
   pointer-events: none;
 }
 
-/* ─── LOADING ─── */
 #loading {
   position: fixed;
   inset: 0;
@@ -102,7 +100,6 @@ canvas {
   50% { opacity: 0.6; }
 }
 
-/* ─── APP WRAPPER ─── */
 #app {
   display: none;
   position: relative;
@@ -112,7 +109,6 @@ canvas {
   margin: 0 auto;
 }
 
-/* ─── TOPBAR ─── */
 .topbar {
   display: flex;
   align-items: center;
@@ -202,7 +198,6 @@ canvas {
   50% { opacity: 0.3; }
 }
 
-/* ─── DIVIDER ─── */
 .section-label {
   font-family: 'Orbitron', monospace;
   font-size: 10px;
@@ -221,13 +216,11 @@ canvas {
   top: 50%;
   width: 22%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border));
 }
 
 .section-label::before { left: 0; background: linear-gradient(90deg, transparent, var(--border)); }
 .section-label::after  { right: 0; background: linear-gradient(270deg, transparent, var(--border)); }
 
-/* ─── LAUNCH GRID ─── */
 .launch-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -324,7 +317,6 @@ canvas {
   word-break: break-all;
 }
 
-/* ─── CONFIG CARDS ─── */
 .cfg-card {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -403,7 +395,6 @@ canvas {
   margin-right: 8px;
 }
 
-/* ─── TOGGLE ─── */
 .toggle {
   width: 44px;
   height: 24px;
@@ -439,7 +430,6 @@ canvas {
   background: white;
 }
 
-/* ─── TERMINAL ─── */
 .terminal {
   background: rgba(5,2,12,0.9);
   border: 1px solid var(--border);
@@ -458,11 +448,7 @@ canvas {
 }
 
 .term-dots { display: flex; gap: 5px; }
-.term-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
+.term-dot { width: 10px; height: 10px; border-radius: 50%; }
 .td-r { background: #ff5f57; }
 .td-y { background: #febc2e; }
 .td-g { background: #28c840; }
@@ -493,7 +479,6 @@ canvas {
 
 .term-log span { color: var(--text-dim); }
 
-/* ─── INJECT PANEL ─── */
 #injectPanel {
   position: fixed;
   bottom: -100%;
@@ -597,7 +582,6 @@ canvas {
 
 <canvas id="bg"></canvas>
 
-<!-- LOADING -->
 <div id="loading">
   <div class="load-logo">Nexor Pro</div>
   <div class="load-sub">System Initializing</div>
@@ -605,10 +589,8 @@ canvas {
   <div class="load-pct" id="loadPct">0%</div>
 </div>
 
-<!-- APP -->
 <div id="app">
 
-  <!-- TOPBAR -->
   <div class="topbar">
     <div class="user-avatar">N</div>
     <div class="user-info">
@@ -621,11 +603,9 @@ canvas {
     </div>
   </div>
 
-  <!-- LAUNCH GAME -->
   <div class="section-label">LAUNCH GAME</div>
 
   <div class="launch-grid">
-    <!-- Free Fire -->
     <div class="launch-card" onclick="launchGame('freefire')">
       <div class="launch-icon">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -637,7 +617,6 @@ canvas {
       <div class="launch-pkg">com.garena.game.fof</div>
     </div>
 
-    <!-- Free Fire MAX -->
     <div class="launch-card" onclick="launchGame('freefiremax')">
       <div class="launch-icon">
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -651,10 +630,8 @@ canvas {
     </div>
   </div>
 
-  <!-- SYSTEM CONFIGURATION -->
   <div class="section-label">SYSTEM CONFIGURATION</div>
 
-  <!-- Config items -->
   <div class="cfg-card" id="cfg0">
     <div class="cfg-dot"></div>
     <div class="cfg-icon">
@@ -759,7 +736,6 @@ canvas {
     <div class="toggle" onclick="toggleSwitch(this,7)"></div>
   </div>
 
-  <!-- CYBER TERMINAL -->
   <div class="section-label">Nexor Terminal Tools</div>
 
   <div class="terminal">
@@ -780,7 +756,6 @@ canvas {
 
 </div>
 
-<!-- INJECT PANEL -->
 <div id="injectPanel">
   <div class="inject-handle"></div>
   <div class="inject-title" id="injectTitle">FREE FIRE CONNECTING</div>
@@ -796,7 +771,6 @@ canvas {
 </div>
 
 <script>
-// ──────────── CANVAS BG ────────────
 const canvas = document.getElementById('bg');
 const ctx = canvas.getContext('2d');
 
@@ -828,7 +802,6 @@ function drawBg() {
 }
 drawBg();
 
-// ──────────── LOADING ────────────
 let lp = 0;
 const loadBar = document.getElementById('loadBar');
 const loadPct = document.getElementById('loadPct');
@@ -848,7 +821,6 @@ const loadTimer = setInterval(() => {
   }
 }, 40);
 
-// ──────────── TOGGLE ────────────
 function playClick(on) {
   try {
     const ac = new (window.AudioContext || window.webkitAudioContext)();
@@ -872,7 +844,6 @@ function toggleSwitch(el, idx) {
   logToTerminal(on ? 'Enabled: ' + card.querySelector('.cfg-name').textContent : 'Disabled: ' + card.querySelector('.cfg-name').textContent);
 }
 
-// ──────────── TERMINAL ────────────
 const termLog = document.getElementById('termLog');
 const termStatus = document.getElementById('termStatus');
 
@@ -881,13 +852,10 @@ function logToTerminal(msg) {
   termLog.scrollTop = termLog.scrollHeight;
 }
 
-// ──────────── LAUNCH GAME ────────────
 function launchGame(game) {
   const isMax = game === 'freefiremax';
   const title = isMax ? 'FREE FIRE MAX' : 'FREE FIRE';
-  const pkg = isMax ? 'com.garena.game.ffmax' : 'com.garena.game.fof';
 
-  // Show inject panel
   document.getElementById('injectTitle').textContent = title + ' CONNECTING';
   document.getElementById('injectPanel').style.bottom = '0';
 
@@ -918,15 +886,11 @@ function launchGame(game) {
       logToTerminal(title + ' launched!');
       termStatus.textContent = 'DONE';
 
-      // Launch via URL scheme (iOS deep link)
       setTimeout(() => {
-        // Try Garena URL scheme first
-        const url = isMax
-          ? 'garena://launch?app=ffmax'
-          : 'garena://launch?app=fof';
+        // ✅ URL scheme yang sudah difix
+        const url = isMax ? 'freefiremax://' : 'freefire://';
         window.location.href = url;
 
-        // Fallback: try opening App Store if not installed (after short delay)
         setTimeout(() => {
           document.getElementById('injectPanel').style.bottom = '-100%';
           termStatus.textContent = 'IDLE';
